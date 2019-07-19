@@ -5,6 +5,7 @@ import {
 } from 'element-ui';
 
 export function requestSuccessFunc(config) {
+  debugger
   // 自定义请求拦截逻辑，可以处理权限，请求发送监控等
   config.headers['Accept-Language'] = store.state.global.language
   return config
