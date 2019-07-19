@@ -1,4 +1,4 @@
-# Polka Explorer
+# Vue Exolorer
 
 ## Build Setup
 
