@@ -1,4 +1,4 @@
-# Vue Exolorer
+# Vue Spa
 
 ## Build Setup
 
