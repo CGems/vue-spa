@@ -35,11 +35,19 @@ class MakeApi {
     baseURL
   }) {
     config.forEach(api => {
-      let { name, desc, method, path, options, baseURL: singleApiBaseURL } = api;
+      let baseURLValue = baseURL;
+      let {
+        name,
+        desc,
+        method,
+        path,
+        options,
+        baseURL: singleApiBaseURL
+      } = api;
       let apiname = `${namespace}${_firstUpperCase(name)}`;
       let url = path;
-      singleApiBaseURL && (baseURL = singleApiBaseURL);
-      isTestEnv && (baseURL = testEnvBaseURLPrefix + baseURL);
+      singleApiBaseURL && (baseURLValue = singleApiBaseURL);
+      isTestEnv && (baseURLValue = testEnvBaseURLPrefix + baseURLValue);
 
       assert(name, `${url} :接口name属性不能为空`);
       assert(url.indexOf("/") === 0, `${url} :接口路径path，首字符应为/`);
@@ -50,9 +58,9 @@ class MakeApi {
             name,
             url,
             desc,
-            method
+            method,
+            baseURL: baseURLValue
           };
-          baseURL && (obj.baseURL = baseURL);
           return axios(
             _normoalize(
               _assign(obj, _assign({}, options, outerOptions)),
