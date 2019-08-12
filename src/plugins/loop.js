@@ -69,17 +69,23 @@ class Loop {
           this.listLoop();
           resolve(res);
         })
-        .catch(error => {
-          reject(error);
+        .catch(err => {
+          this.config[name].previousLoopTimestamp = new Date().getTime(); // 默认认为添加时刚刚执行了一次，存下添加时的时间作为上一次循环时间戳
+          this.sortLoopList();
+          this.listLoop();
+          reject(err);
         });
     });
   }
   removeLoop(name) {
     // 删除一个轮询
-    this.config[name].callback = null;
-    this.config[name].previousLoopTimestamp = 1832676336581;
-    this.loopList.splice(this.loopList.indexOf(name), 1);
-    this.listLoop();
+    const index = this.loopList.indexOf(name);
+    if (index > -1) {
+      this.config[name].callback = null;
+      this.config[name].previousLoopTimestamp = 1832676336581;
+      this.loopList.splice(index, 1);
+      this.listLoop();
+    }
   }
   sortLoopList() {
     this.loopList.sort((a, b) => {
