@@ -28,7 +28,7 @@ export function responseSuccessFunc(responseObj) {
       return resData.body;
     default:
       // 业务中还会有一些特殊 code 逻辑，我们可以在这里做统一处理，也可以下方它们到业务层
-      !responseObj.config.noShowDefaultError && GLOBAL.vbus.$emit('global.$dialog.show', resData.msg);
+      !responseObj.config.customConfig.noShowDefaultError && GLOBAL.vbus.$emit('global.$dialog.show', resData.msg);
       return Promise.reject(resData);
   }
 }

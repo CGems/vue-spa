@@ -40,6 +40,6 @@
     "vue-template-compiler": "^2.5.17"
   },
   "optionalDependencies": {
-    "axios": "0.18.0"
+    "axios": "0.18.1"
   }
 }
